@@ -1,0 +1,51 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff4d4d;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#ff4d4d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff4d4d;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#gradBg)"/>
+  
+  <!-- Grid Background -->
+  <line x1="20" y1="0" x2="20" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="40" y1="0" x2="40" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="60" y1="0" x2="60" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="80" y1="0" x2="80" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="100" y1="0" x2="100" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="120" y1="0" x2="120" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="140" y1="0" x2="140" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="160" y1="0" x2="160" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="180" y1="0" x2="180" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="200" y1="0" x2="200" y2="200" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  
+  <!-- Analytics Chart -->
+  <text x="20" y="25" font-family="monospace" font-size="12" fill="#fff" opacity="0.8">Analytics Dashboard</text>
+  
+  <!-- Chart Lines -->
+  <polyline points="30,150 60,120 90,130 120,100 150,110 180,80 210,90 240,60" stroke="url(#gradLine)" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <polyline points="30,160 60,140 90,145 120,120 150,130 180,110 210,120 240,90" stroke="#888" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
+  
+  <!-- Data Points -->
+  <circle cx="30" cy="150" r="3" fill="#ff4d4d"/>
+  <circle cx="60" cy="120" r="3" fill="#ff4d4d"/>
+  <circle cx="90" cy="130" r="3" fill="#ff4d4d"/>
+  <circle cx="120" cy="100" r="3" fill="#ff4d4d"/>
+  <circle cx="150" cy="110" r="3" fill="#ff4d4d"/>
+  <circle cx="180" cy="80" r="3" fill="#ff4d4d"/>
+  <circle cx="210" cy="90" r="3" fill="#ff4d4d"/>
+  <circle cx="240" cy="60" r="3" fill="#ff4d4d"/>
+  
+  <!-- Info Panel -->
+  <rect x="260" y="50" width="120" height="110" fill="rgba(255,77,77,0.05)" stroke="rgba(255,77,77,0.2)" stroke-width="1" rx="8"/>
+  <text x="270" y="70" font-family="monospace" font-size="10" fill="#ff4d4d">100K+ DAU</text>
+  <text x="270" y="90" font-family="monospace" font-size="10" fill="#fff" opacity="0.8">99.9% Uptime</text>
+  <text x="270" y="110" font-family="monospace" font-size="10" fill="#fff" opacity="0.8">Sub-100ms</text>
+  <text x="270" y="130" font-family="monospace" font-size="10" fill="#fff" opacity="0.6">Response Time</text>
+  <text x="270" y="150" font-family="monospace" font-size="10" fill="#fff" opacity="0.8">Real-time Sync</text>
+</svg>

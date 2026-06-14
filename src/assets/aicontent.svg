@@ -1,0 +1,62 @@
+<svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradBg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradAI" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#666;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#333;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="200" fill="url(#gradBg3)"/>
+  
+  <!-- Header -->
+  <text x="20" y="25" font-family="monospace" font-size="12" fill="#fff" opacity="0.8">AI Content Studio</text>
+  
+  <!-- AI Models Available -->
+  <rect x="20" y="40" width="50" height="50" fill="rgba(200,150,100,0.1)" stroke="rgba(200,150,100,0.3)" stroke-width="1" rx="4"/>
+  <text x="28" y="60" font-family="monospace" font-size="10" fill="#daa" font-weight="bold">GPT</text>
+  <text x="25" y="82" font-family="monospace" font-size="8" fill="#aaa">Text Gen</text>
+  
+  <rect x="75" y="40" width="50" height="50" fill="rgba(150,180,255,0.1)" stroke="rgba(150,180,255,0.3)" stroke-width="1" rx="4"/>
+  <text x="81" y="60" font-family="monospace" font-size="10" fill="#aaddff" font-weight="bold">DALL-E</text>
+  <text x="82" y="82" font-family="monospace" font-size="8" fill="#aaa">Image Gen</text>
+  
+  <rect x="130" y="40" width="50" height="50" fill="rgba(200,100,150,0.1)" stroke="rgba(200,100,150,0.3)" stroke-width="1" rx="4"/>
+  <text x="132" y="60" font-family="monospace" font-size="9" fill="#ff99dd" font-weight="bold">Midjourney</text>
+  <text x="140" y="82" font-family="monospace" font-size="8" fill="#aaa">Creative</text>
+  
+  <!-- Content Creation Panel -->
+  <rect x="190" y="40" width="190" height="50" fill="rgba(100,200,200,0.05)" stroke="rgba(100,200,200,0.25)" stroke-width="1.5" rx="6"/>
+  <text x="200" y="58" font-family="monospace" font-size="9" fill="#4dffff">Content Generation</text>
+  <text x="200" y="73" font-family="monospace" font-size="8" fill="#fff" opacity="0.7">25+ Languages · 10K+ Monthly</text>
+  <text x="200" y="85" font-family="monospace" font-size="8" fill="#fff" opacity="0.6">SEO · Scheduling · Batch Processing</text>
+  
+  <!-- Features Section -->
+  <line x1="20" y1="100" x2="380" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  
+  <rect x="20" y="110" width="85" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="4"/>
+  <text x="30" y="130" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">Multi-Language</text>
+  <text x="30" y="145" font-family="monospace" font-size="8" fill="#888">Support (25+)</text>
+  <text x="30" y="160" font-family="monospace" font-size="8" fill="#666">Brand Voice</text>
+  <text x="30" y="172" font-family="monospace" font-size="8" fill="#666">Customization</text>
+  
+  <rect x="115" y="110" width="85" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="4"/>
+  <text x="125" y="130" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">Content Calendar</text>
+  <text x="125" y="145" font-family="monospace" font-size="8" fill="#888">Auto Scheduling</text>
+  <text x="125" y="160" font-family="monospace" font-size="8" fill="#666">Publishing</text>
+  <text x="125" y="172" font-family="monospace" font-size="8" fill="#666">Analytics</text>
+  
+  <rect x="210" y="110" width="85" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="4"/>
+  <text x="220" y="130" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">5000+ Creators</text>
+  <text x="220" y="145" font-family="monospace" font-size="8" fill="#888">Active Users</text>
+  <text x="220" y="160" font-family="monospace" font-size="8" fill="#666">10K+ Monthly</text>
+  <text x="220" y="172" font-family="monospace" font-size="8" fill="#666">Content Pieces</text>
+  
+  <rect x="305" y="110" width="75" height="70" fill="rgba(255,255,255,0.02)" stroke="rgba(255,255,255,0.1)" stroke-width="1" rx="4"/>
+  <text x="315" y="130" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">Batch Process</text>
+  <text x="315" y="145" font-family="monospace" font-size="8" fill="#888">Bulk Generation</text>
+  <text x="315" y="160" font-family="monospace" font-size="8" fill="#666">API Integration</text>
+  <text x="315" y="172" font-family="monospace" font-size="8" fill="#666">Workflows</text>
+</svg>
