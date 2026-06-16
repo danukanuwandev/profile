@@ -114,17 +114,7 @@ export default function Portfolio() {
     const embed = {
       title: "New Contact Submission 📬",
       color: 16731469, // #ff0000ff in decimal
-      fields: [
-        { name: "Name", value: contactForm.name, inline: true },
-
-        { name: "Email", value: contactForm.email },
-
-        { name: "Phone", value: contactForm.phone },
-
-        { name: "Subject", value: contactForm.subject },
-
-        { name: "Message", value: contactForm.message }
-      ],
+      description: `> **👤 Name:** \`${contactForm.name}\`\n> **📧 Email:** \`${contactForm.email}\`\n> **📞 Phone:** \`${contactForm.phone}\`\n> **📌 Subject:** \`${contactForm.subject}\`\n\n**💬 Message:**\n\`\`\`text\n${contactForm.message}\n\`\`\``,
       timestamp: new Date().toISOString()
     };
 
@@ -132,7 +122,7 @@ export default function Portfolio() {
       await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: "@Danuka Nuwan", embeds: [embed] })
+        body: JSON.stringify({ content: "<@1192696925019963433>", embeds: [embed] })
       });
 
       setContactForm({ name: "", email: "", phone: "", subject: "", message: "" });
