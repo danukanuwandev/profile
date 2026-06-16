@@ -115,9 +115,9 @@ export default function Portfolio() {
       title: "New Contact Submission 📬",
       color: 16731469, // #ff4d4d in decimal
       fields: [
-        { name: "Name", value: contactForm.name, inline: true },
-        { name: "Email", value: contactForm.email, inline: true },
-        { name: "Phone", value: contactForm.phone, inline: true },
+        { name: "Name", value: contactForm.name },
+        { name: "Email", value: contactForm.email },
+        { name: "Phone", value: contactForm.phone },
         { name: "Subject", value: contactForm.subject },
         { name: "Message", value: contactForm.message }
       ],
