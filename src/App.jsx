@@ -110,15 +110,19 @@ export default function Portfolio() {
     }
 
     const webhookUrl = "https://discord.com/api/webhooks/1516304316649050192/GN5Zh9CPpJZ1g8vo-LJwC5GRxuYMh5Mm797CWPDtMNyc6v9cAFFHN8dV_jnG4NIm3FHF";
-    
+
     const embed = {
       title: "New Contact Submission 📬",
-      color: 16731469, // #ff4d4d in decimal
+      color: 16731469, // #ff0000ff in decimal
       fields: [
-        { name: "Name", value: contactForm.name },
+        { name: "Name", value: contactForm.name, inline: true },
+
         { name: "Email", value: contactForm.email },
+
         { name: "Phone", value: contactForm.phone },
+
         { name: "Subject", value: contactForm.subject },
+
         { name: "Message", value: contactForm.message }
       ],
       timestamp: new Date().toISOString()
@@ -130,7 +134,7 @@ export default function Portfolio() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ embeds: [embed] })
       });
-      
+
       setContactForm({ name: "", email: "", phone: "", subject: "", message: "" });
       setContactSent(true);
       setTimeout(() => setContactSent(false), 3000);
@@ -934,12 +938,12 @@ export default function Portfolio() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               <div style={{ display: "flex", gap: "16px" }}>
-                <input className="form-input" style={{ flex: 1 }} placeholder="Your name" value={contactForm.name} onChange={e => setContactForm({...contactForm, name: e.target.value})} />
-                <input className="form-input" style={{ flex: 1 }} placeholder="+94 7X XXX XXXX" type="tel" value={contactForm.phone} onChange={e => setContactForm({...contactForm, phone: e.target.value})} />
+                <input className="form-input" style={{ flex: 1 }} placeholder="Your name" value={contactForm.name} onChange={e => setContactForm({ ...contactForm, name: e.target.value })} />
+                <input className="form-input" style={{ flex: 1 }} placeholder="+94 7X XXX XXXX" type="tel" value={contactForm.phone} onChange={e => setContactForm({ ...contactForm, phone: e.target.value })} />
               </div>
-              <input className="form-input" placeholder="your@email.com" value={contactForm.email} onChange={e => setContactForm({...contactForm, email: e.target.value})} />
-              <input className="form-input" placeholder="Subject" value={contactForm.subject} onChange={e => setContactForm({...contactForm, subject: e.target.value})} />
-              <textarea className="form-input" rows={5} placeholder="Tell me about your project..." style={{ resize: "vertical" }} value={contactForm.message} onChange={e => setContactForm({...contactForm, message: e.target.value})} />
+              <input className="form-input" placeholder="your@email.com" value={contactForm.email} onChange={e => setContactForm({ ...contactForm, email: e.target.value })} />
+              <input className="form-input" placeholder="Subject" value={contactForm.subject} onChange={e => setContactForm({ ...contactForm, subject: e.target.value })} />
+              <textarea className="form-input" rows={5} placeholder="Tell me about your project..." style={{ resize: "vertical" }} value={contactForm.message} onChange={e => setContactForm({ ...contactForm, message: e.target.value })} />
               {contactSent ? (
                 <div style={{ padding: "14px 32px", borderRadius: "100px", background: "rgba(77,255,180,0.1)", border: "1px solid rgba(77,255,180,0.3)", color: "#4dffb4", fontFamily: "'DM Mono', monospace", fontSize: "14px", fontWeight: 600, textAlign: "center" }}>✓ Message sent successfully!</div>
               ) : (
