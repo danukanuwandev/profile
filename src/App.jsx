@@ -132,7 +132,7 @@ export default function Portfolio() {
       await fetch(webhookUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ embeds: [embed] })
+        body: JSON.stringify({ content: "@Danuka Nuwan", embeds: [embed] })
       });
 
       setContactForm({ name: "", email: "", phone: "", subject: "", message: "" });
