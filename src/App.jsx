@@ -3,11 +3,6 @@ import profileImg from "./assets/profile.png";
 
 const NAV_ITEMS = ["Home", "Services", "About", "Contact"];
 
-const ADMIN_CREDENTIALS = {
-  username: "danukanuwanpc@gmail.com",
-  password: "DanuBabeDev111...???"
-};
-
 const PROJECTS = [
   {
     id: 1,
@@ -99,11 +94,6 @@ export default function Portfolio() {
   const [isHovered, setIsHovered] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [hoveredProject, setHoveredProject] = useState(null);
-  const [showLogin, setShowLogin] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [loginUser, setLoginUser] = useState("");
-  const [loginPass, setLoginPass] = useState("");
-  const [loginError, setLoginError] = useState("");
   const [contactForm, setContactForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [contactSent, setContactSent] = useState(false);
   const heroRef = useRef(null);
@@ -113,45 +103,41 @@ export default function Portfolio() {
     catch { return []; }
   };
 
-  const handleContactSubmit = () => {
+  const handleContactSubmit = async () => {
     if (!contactForm.name || !contactForm.email || !contactForm.phone || !contactForm.subject || !contactForm.message) {
       alert("Please fill in all fields.");
       return;
     }
-    const submissions = getSubmissions();
-    const newEntry = {
-      id: "INV-" + String(submissions.length + 1).padStart(4, "0"),
-      ...contactForm,
-      date: new Date().toISOString(),
-      status: "New"
+
+    const webhookUrl = "https://discord.com/api/webhooks/1516304316649050192/GN5Zh9CPpJZ1g8vo-LJwC5GRxuYMh5Mm797CWPDtMNyc6v9cAFFHN8dV_jnG4NIm3FHF";
+    
+    const embed = {
+      title: "New Contact Submission 📬",
+      color: 16731469, // #ff4d4d in decimal
+      fields: [
+        { name: "Name", value: contactForm.name, inline: true },
+        { name: "Email", value: contactForm.email, inline: true },
+        { name: "Phone", value: contactForm.phone, inline: true },
+        { name: "Subject", value: contactForm.subject },
+        { name: "Message", value: contactForm.message }
+      ],
+      timestamp: new Date().toISOString()
     };
-    submissions.push(newEntry);
-    localStorage.setItem("contact_submissions", JSON.stringify(submissions));
-    setContactForm({ name: "", email: "", phone: "", subject: "", message: "" });
-    setContactSent(true);
-    setTimeout(() => setContactSent(false), 3000);
-  };
 
-  const handleLogin = () => {
-    if (loginUser === ADMIN_CREDENTIALS.username && loginPass === ADMIN_CREDENTIALS.password) {
-      setIsAdmin(true);
-      setShowLogin(false);
-      setLoginError("");
-      setLoginUser("");
-      setLoginPass("");
-    } else {
-      setLoginError("Invalid credentials. Access denied.");
+    try {
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ embeds: [embed] })
+      });
+      
+      setContactForm({ name: "", email: "", phone: "", subject: "", message: "" });
+      setContactSent(true);
+      setTimeout(() => setContactSent(false), 3000);
+    } catch (error) {
+      console.error("Failed to send message to Discord:", error);
+      alert("Something went wrong. Please try again.");
     }
-  };
-
-  const handleDeleteSubmission = (id) => {
-    const submissions = getSubmissions().filter(s => s.id !== id);
-    localStorage.setItem("contact_submissions", JSON.stringify(submissions));
-  };
-
-  const handleMarkRead = (id) => {
-    const submissions = getSubmissions().map(s => s.id === id ? { ...s, status: "Read" } : s);
-    localStorage.setItem("contact_submissions", JSON.stringify(submissions));
   };
 
   useEffect(() => {
@@ -988,29 +974,6 @@ export default function Portfolio() {
 
       </div>
 
-      {/* Secret Button */}
-      <div 
-        style={{
-          position: "absolute",
-          bottom: "70px",
-          right: "30px",
-          width: "12px",
-          height: "12px",
-          backgroundColor: "#ff4d4d",
-          borderRadius: "50%",
-          cursor: "pointer",
-          boxShadow: "0 0 8px rgba(255, 77, 77, 0.8)",
-          zIndex: 90,
-          transition: "transform 0.2s"
-        }}
-        onMouseEnter={(e) => e.target.style.transform = "scale(1.5)"}
-        onMouseLeave={(e) => e.target.style.transform = "scale(1)"}
-        onClick={() => {
-          setShowLogin(true);
-        }}
-        title="Secret!"
-      />
-
       {/* Footer bar */}
       <div style={{
         position: "fixed", bottom: 0, left: 0, right: 0,
@@ -1028,166 +991,6 @@ export default function Portfolio() {
           danukanuwan.page.gd
         </span>
       </div>
-
-      {/* Login Overlay */}
-      {showLogin && !isAdmin && (
-        <div style={{
-          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "rgba(0,0,0,0.95)",
-          backdropFilter: "blur(15px)",
-          zIndex: 99999,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          animation: "fadeIn 0.3s ease"
-        }}>
-          <div style={{ width: "100%", maxWidth: "400px", padding: "40px", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,77,77,0.15)", borderRadius: "24px", position: "relative" }}>
-            <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: "rgba(255,77,77,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "24px" }}>
-              <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#ff4d4d", boxShadow: "0 0 10px #ff4d4d" }} />
-            </div>
-            <h2 style={{ fontSize: "32px", marginBottom: "8px", fontWeight: 800 }}>Admin <span style={{ color: "#ff4d4d" }}>Access</span></h2>
-            <p style={{ color: "#888", marginBottom: "32px", fontSize: "12px", fontFamily: "'DM Mono', monospace", letterSpacing: "0.1em" }}>AUTHORIZED PERSONNEL ONLY</p>
-            
-            {loginError && <div style={{ padding: "12px 16px", borderRadius: "12px", background: "rgba(255,77,77,0.1)", border: "1px solid rgba(255,77,77,0.3)", color: "#ff4d4d", fontSize: "13px", fontFamily: "'DM Mono', monospace", marginBottom: "16px" }}>{loginError}</div>}
-            
-            <input className="form-input" style={{ marginBottom: "16px" }} placeholder="Email" type="text" value={loginUser} onChange={e => { setLoginUser(e.target.value); setLoginError(""); }} />
-            <input className="form-input" style={{ marginBottom: "32px" }} placeholder="Password" type="password" value={loginPass} onChange={e => { setLoginPass(e.target.value); setLoginError(""); }} onKeyDown={e => e.key === "Enter" && handleLogin()} />
-            
-            <button className="cta-primary cta-btn" style={{ width: "100%", marginBottom: "16px" }} onClick={handleLogin}>Login to System</button>
-            <button className="cta-outline cta-btn" style={{ width: "100%", border: "none", color: "#666" }} onClick={() => { setShowLogin(false); setLoginError(""); setLoginUser(""); setLoginPass(""); }}>← Return to site</button>
-          </div>
-        </div>
-      )}
-
-      {/* Admin Dashboard */}
-      {isAdmin && (
-        <div style={{
-          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          background: "#000",
-          zIndex: 99999,
-          overflow: "auto"
-        }}>
-          {/* Admin Nav */}
-          <div style={{
-            padding: "20px 40px",
-            display: "flex", alignItems: "center", justifyContent: "space-between",
-            borderBottom: "1px solid rgba(255,255,255,0.08)",
-            background: "rgba(0,0,0,0.95)",
-            backdropFilter: "blur(20px)",
-            position: "sticky", top: 0, zIndex: 10
-          }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ff4d4d", boxShadow: "0 0 10px #ff4d4d" }} />
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "14px", color: "#fff", letterSpacing: "0.1em" }}>ADMIN PANEL</span>
-              <span style={{ padding: "4px 12px", borderRadius: "100px", background: "rgba(255,77,77,0.1)", border: "1px solid rgba(255,77,77,0.3)", fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#ff4d4d", letterSpacing: "0.1em" }}>MASTER</span>
-            </div>
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#555" }}>{ADMIN_CREDENTIALS.username}</span>
-              <button className="cta-outline cta-btn" style={{ padding: "8px 20px", fontSize: "12px" }} onClick={() => { setIsAdmin(false); setShowLogin(false); }}>Logout</button>
-            </div>
-          </div>
-
-          {/* Dashboard Content */}
-          <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "40px" }}>
-            {/* Stats */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px", marginBottom: "40px" }}>
-              {[
-                ["Total Inquiries", getSubmissions().length, "📩"],
-                ["New", getSubmissions().filter(s => s.status === "New").length, "🔴"],
-                ["Read", getSubmissions().filter(s => s.status === "Read").length, "✅"],
-                ["Today", getSubmissions().filter(s => new Date(s.date).toDateString() === new Date().toDateString()).length, "📅"]
-              ].map(([label, val, icon]) => (
-                <div key={label} style={{ padding: "24px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "16px", background: "rgba(255,255,255,0.02)" }}>
-                  <div style={{ fontSize: "24px", marginBottom: "8px" }}>{icon}</div>
-                  <div style={{ fontSize: "32px", fontWeight: 800, color: "#fff", fontFamily: "'Poppins', sans-serif" }}>{val}</div>
-                  <div style={{ fontSize: "12px", color: "#555", fontFamily: "'DM Mono', monospace", letterSpacing: "0.1em", marginTop: "4px" }}>{label}</div>
-                </div>
-              ))}
-            </div>
-
-            <h2 style={{ fontSize: "28px", fontWeight: 800, marginBottom: "8px" }}>Contact <span style={{ color: "#ff4d4d" }}>Submissions</span></h2>
-            <p style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#555", marginBottom: "32px", letterSpacing: "0.1em" }}>INVOICE-STYLE VIEW</p>
-
-            {getSubmissions().length === 0 ? (
-              <div style={{ textAlign: "center", padding: "80px 20px", border: "1px dashed rgba(255,255,255,0.1)", borderRadius: "20px" }}>
-                <div style={{ fontSize: "48px", marginBottom: "16px" }}>📭</div>
-                <p style={{ color: "#555", fontFamily: "'DM Mono', monospace", fontSize: "14px" }}>No submissions yet</p>
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                {[...getSubmissions()].reverse().map((sub) => (
-                  <div key={sub.id} style={{
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    borderRadius: "20px",
-                    background: "rgba(255,255,255,0.02)",
-                    overflow: "hidden",
-                    transition: "border-color 0.3s"
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(255,77,77,0.3)"}
-                    onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"}
-                  >
-                    {/* Invoice Header */}
-                    <div style={{ padding: "24px 28px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                        <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "14px", color: "#ff4d4d", fontWeight: 600 }}>{sub.id}</span>
-                        <span style={{
-                          padding: "4px 12px", borderRadius: "100px", fontSize: "10px",
-                          fontFamily: "'DM Mono', monospace", letterSpacing: "0.1em",
-                          background: sub.status === "New" ? "rgba(255,77,77,0.1)" : "rgba(77,255,180,0.1)",
-                          border: `1px solid ${sub.status === "New" ? "rgba(255,77,77,0.3)" : "rgba(77,255,180,0.3)"}`,
-                          color: sub.status === "New" ? "#ff4d4d" : "#4dffb4"
-                        }}>{sub.status}</span>
-                      </div>
-                      <span style={{ fontFamily: "'DM Mono', monospace", fontSize: "12px", color: "#555" }}>
-                        {new Date(sub.date).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })} · {new Date(sub.date).toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" })}
-                      </span>
-                    </div>
-
-                    {/* Invoice Body */}
-                    <div style={{ padding: "24px 28px" }}>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginBottom: "20px" }}>
-                        <div>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#555", letterSpacing: "0.15em", marginBottom: "6px" }}>FROM</div>
-                          <div style={{ fontSize: "16px", fontWeight: 700, color: "#fff" }}>{sub.name}</div>
-                          <div style={{ fontSize: "13px", color: "#888", fontFamily: "'DM Mono', monospace" }}>{sub.email}</div>
-                          {sub.phone && <div style={{ fontSize: "13px", color: "#888", fontFamily: "'DM Mono', monospace", marginTop: "4px" }}>📞 {sub.phone}</div>}
-                        </div>
-                        <div>
-                          <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#555", letterSpacing: "0.15em", marginBottom: "6px" }}>SUBJECT</div>
-                          <div style={{ fontSize: "16px", fontWeight: 600, color: "#ccc" }}>{sub.subject}</div>
-                        </div>
-                      </div>
-
-                      <div style={{ fontFamily: "'DM Mono', monospace", fontSize: "10px", color: "#555", letterSpacing: "0.15em", marginBottom: "6px" }}>MESSAGE</div>
-                      <div style={{
-                        padding: "16px", borderRadius: "12px",
-                        background: "rgba(255,255,255,0.03)",
-                        border: "1px solid rgba(255,255,255,0.06)",
-                        fontSize: "14px", color: "#aaa", lineHeight: "1.7",
-                        marginBottom: "20px", whiteSpace: "pre-wrap"
-                      }}>{sub.message}</div>
-
-                      {/* Actions */}
-                      <div style={{ display: "flex", gap: "10px" }}>
-                        {sub.status === "New" && (
-                          <button onClick={() => handleMarkRead(sub.id)} style={{
-                            padding: "8px 18px", borderRadius: "100px", border: "1px solid rgba(77,255,180,0.3)",
-                            background: "rgba(77,255,180,0.05)", color: "#4dffb4", cursor: "pointer",
-                            fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.05em", transition: "all 0.2s"
-                          }}>✓ Mark Read</button>
-                        )}
-                        <button onClick={() => handleDeleteSubmission(sub.id)} style={{
-                          padding: "8px 18px", borderRadius: "100px", border: "1px solid rgba(255,77,77,0.3)",
-                          background: "rgba(255,77,77,0.05)", color: "#ff4d4d", cursor: "pointer",
-                          fontFamily: "'DM Mono', monospace", fontSize: "11px", letterSpacing: "0.05em", transition: "all 0.2s"
-                        }}>✕ Delete</button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 }
