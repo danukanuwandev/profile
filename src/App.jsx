@@ -895,7 +895,7 @@ export default function Portfolio() {
                   ["Company", "NetchX™"],
                   ["Focus", "React, Node.js, Cloud"],
                   ["Status", "✅ Open to projects"],
-                  ["Experience", "3+ years"],
+                  ["Experience", "2+ years"],
                 ].map(([k, v]) => (
                   <div key={k} style={{
                     display: "flex", justifyContent: "space-between", alignItems: "center",
